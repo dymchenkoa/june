@@ -1,0 +1,270 @@
+<definitions name="ChatService"
+  targetNamespace="urn:chat-service"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="urn:chat-service"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <types>
+    <xsd:schema targetNamespace="urn:chat-service">
+      <xsd:element name="pingRequest">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="pingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="echoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="text" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="echoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="loginRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="loginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="listUsersRequest">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="listUsersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="users" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="sendMessageRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sender" type="xsd:string"/>
+            <xsd:element name="recipient" type="xsd:string"/>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendMessageResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="sendFileRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sender" type="xsd:string"/>
+            <xsd:element name="recipient" type="xsd:string"/>
+            <xsd:element name="fileName" type="xsd:string"/>
+            <xsd:element name="fileContent" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendFileResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- ✅ checkMessages added -->
+      <xsd:element name="checkMessagesRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkMessagesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="messages" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="pingRequest">
+    <part name="parameters" element="tns:pingRequest"/>
+  </message>
+  <message name="pingResponse">
+    <part name="parameters" element="tns:pingResponse"/>
+  </message>
+
+  <message name="echoRequest">
+    <part name="parameters" element="tns:echoRequest"/>
+  </message>
+  <message name="echoResponse">
+    <part name="parameters" element="tns:echoResponse"/>
+  </message>
+
+  <message name="loginRequest">
+    <part name="parameters" element="tns:loginRequest"/>
+  </message>
+  <message name="loginResponse">
+    <part name="parameters" element="tns:loginResponse"/>
+  </message>
+
+  <message name="listUsersRequest">
+    <part name="parameters" element="tns:listUsersRequest"/>
+  </message>
+  <message name="listUsersResponse">
+    <part name="parameters" element="tns:listUsersResponse"/>
+  </message>
+
+  <message name="sendMessageRequest">
+    <part name="parameters" element="tns:sendMessageRequest"/>
+  </message>
+  <message name="sendMessageResponse">
+    <part name="parameters" element="tns:sendMessageResponse"/>
+  </message>
+
+  <message name="sendFileRequest">
+    <part name="parameters" element="tns:sendFileRequest"/>
+  </message>
+  <message name="sendFileResponse">
+    <part name="parameters" element="tns:sendFileResponse"/>
+  </message>
+
+  <!-- ✅ Added -->
+  <message name="checkMessagesRequest">
+    <part name="parameters" element="tns:checkMessagesRequest"/>
+  </message>
+  <message name="checkMessagesResponse">
+    <part name="parameters" element="tns:checkMessagesResponse"/>
+  </message>
+
+  <portType name="ChatServicePortType">
+    <operation name="ping">
+      <input message="tns:pingRequest"/>
+      <output message="tns:pingResponse"/>
+    </operation>
+    <operation name="echo">
+      <input message="tns:echoRequest"/>
+      <output message="tns:echoResponse"/>
+    </operation>
+    <operation name="login">
+      <input message="tns:loginRequest"/>
+      <output message="tns:loginResponse"/>
+    </operation>
+    <operation name="listUsers">
+      <input message="tns:listUsersRequest"/>
+      <output message="tns:listUsersResponse"/>
+    </operation>
+    <operation name="sendMessage">
+      <input message="tns:sendMessageRequest"/>
+      <output message="tns:sendMessageResponse"/>
+    </operation>
+    <operation name="sendFile">
+      <input message="tns:sendFileRequest"/>
+      <output message="tns:sendFileResponse"/>
+    </operation>
+    <!-- ✅ Added -->
+    <operation name="checkMessages">
+      <input message="tns:checkMessagesRequest"/>
+      <output message="tns:checkMessagesResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="ChatServiceBinding" type="tns:ChatServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ping">
+      <soap:operation soapAction="urn:chat-service#ping"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="echo">
+      <soap:operation soapAction="urn:chat-service#echo"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="login">
+      <soap:operation soapAction="urn:chat-service#login"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="listUsers">
+      <soap:operation soapAction="urn:chat-service#listUsers"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="sendMessage">
+      <soap:operation soapAction="urn:chat-service#sendMessage"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="sendFile">
+      <soap:operation soapAction="urn:chat-service#sendFile"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <!-- ✅ Added -->
+    <operation name="checkMessages">
+      <soap:operation soapAction="urn:chat-service#checkMessages"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="ChatService">
+    <port name="ChatServicePort" binding="tns:ChatServiceBinding">
+      <soap:address location="http://localhost:8000/service"/>
+    </port>
+  </service>
+</definitions>
